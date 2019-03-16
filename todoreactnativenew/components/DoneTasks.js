@@ -9,7 +9,7 @@ class DoneTasks extends Component {
                 <Text>Done Tasks</Text>
 
                 <FlatList
-                    data={this.props.tasks}
+                    data={this.props.taskData}
                     renderItem={({item}) => {
                         if (item.completed === true) {
                             return <TaskItem itemData={item}/>;

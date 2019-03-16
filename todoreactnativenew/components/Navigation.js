@@ -1,41 +1,21 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import Home from "./Home";
-import DoneTasks from "./DoneTasks";
-import UndoneTasks from "./UndoneTasks";
-import * as Alert from "react-native";
+import React from "react";
+import { View, Text } from "react-native";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
 class HomeScreen extends React.Component {
     render() {
-        console.log(this.props.taskData);
         return (
-            <Home tasks={this.props.taskData}/>
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+                <Text>Home Screen</Text>
+            </View>
         );
     }
 }
 
-class DoneScreen extends React.Component {
-    render() {
-        return (
-            <DoneTasks tasks={this.props.taskData}/>
-        );
+const Navigation = createStackNavigator({
+    Home: {
+        screen: HomeScreen
     }
-}
-
-class UndoneScreen extends React.Component {
-    render() {
-        return (
-            <UndoneTasks tasks={this.props.taskData}/>
-        );
-    }
-}
-
-const Navigation = createBottomTabNavigator({
-    Undone: { screen: UndoneScreen },
-    Home: { screen: HomeScreen },
-    Done: { screen: DoneScreen }
-
 });
 
-export default createAppContainer(Navigation);
+export default Navigation;

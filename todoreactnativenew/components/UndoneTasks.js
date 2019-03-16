@@ -9,7 +9,7 @@ class UndoneTasks extends Component {
                 <Text>Undone Tasks</Text>
 
                 <FlatList
-                    data={this.props.tasks}
+                    data={this.props.taskData}
                     renderItem={({item}) => {
                         if (item.completed === false) {
                             return <TaskItem itemData={item}/>;

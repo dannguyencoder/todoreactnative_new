@@ -9,12 +9,16 @@ class Home extends Component {
     }
 
     render() {
+        // console.log(this.props.tasks);
+        // console.log(this.props.taskData);
+        // alert(this.props.tasks);
+        // alert(this.props.taskData);
         return (
             <View>
                 <Text>Home of Tasks</Text>
 
                 <FlatList
-                    data={this.props.tasks}
+                    data={this.props.taskData}
                     renderItem={({item}) => <TaskItem itemData={item}/>}
                 />
             </View>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Navigation from './Navigation';
 import {View, Text} from 'react-native';
+import {createStackNavigator, createAppContainer} from "react-navigation";
 
 class HomeContainer extends Component {
 
@@ -28,12 +29,12 @@ class HomeContainer extends Component {
     }
 
     render() {
+        const Navigation = createAppContainer(Navigation);
 
         return (
-            <View>
-                {/*<Text>{this.state.tasks.toString()}</Text>*/}
-                <Navigation taskData={this.state.tasks}/>
-            </View>
+
+            <Navigation taskData={this.state.tasks}/>
+
 
         );
     }
