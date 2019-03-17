@@ -5,10 +5,7 @@ import {View, Text} from 'react-native';
 class App extends Component {
     render() {
         return (
-
                 <HomeContainer/>
-
-
         )
     }
 }
