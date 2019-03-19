@@ -14,6 +14,7 @@ class HomeContainer extends Component {
 
         return (
             <MNavigation/>
+
         );
     }
 }

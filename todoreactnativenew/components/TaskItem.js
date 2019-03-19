@@ -12,11 +12,11 @@ class TaskItem extends Component {
 
         return (
             <View>
-                <TouchableWithoutFeedback onClick={this.showDetail}>
+                {/* <TouchableWithoutFeedback onClick={this.showDetail}> */}
                     <Text>{this.props.itemData.taskName}</Text>
                     <Text>{this.props.itemData.taskDesc}</Text>
-                    <Text>Status: {this.props.itemData.completed.toString()}</Text>
-                </TouchableWithoutFeedback>
+                    <Text>Status: {this.props.itemData.completed && this.props.itemData.completed.toString()}</Text>
+                {/* </TouchableWithoutFeedback> */}
 
 
                 <Button

@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import {Button, TextInput, View} from "react-native";
+import {connect} from 'react-redux';
+
+import {Button, TextInput, View, Modal} from "react-native";
+import {createTask} from '../action/taskAction'
 
 class DialogInputAddTask extends Component {
     constructor(props) {
@@ -10,29 +13,64 @@ class DialogInputAddTask extends Component {
         };
     }
 
+    addTask = () => {
+        console.log("FFSFSF");
+
+        const {taskName, taskDesc} = this.state;
+        this.props.createTask({taskName, taskDesc});
+        this.props.onClose && this.props.onClose();
+    };
+
     render() {
+        const {
+            isVisible
+        } = this.props;
         return (
-            <View>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(text) => this.setState({taskName})}
-                    value={this.state.text}
-                />
+                <Modal
+                    transparent
+                    visible={isVisible}
+                >
+                <View
+                    style={{ flex: 1,  alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+                    <View style={{ width: '90%', padding: 10, backgroundColor: 'white', borderRadius: 5 }}>
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                            onChangeText={(textTaskName) => this.setState({taskName: textTaskName})}
+                            value={this.state.text}
+                        />
 
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(text) => this.setState({taskDesc})}
-                    value={this.state.text}
-                />
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                            onChangeText={(textTaskDesc) => this.setState({taskDesc: textTaskDesc})}
+                            value={this.state.text}
+                        />
 
-                <Button
-                    title="Add Task"
-                    color="#841584"
-                    accessibilityLabel="Add more tasks"
-                />
-            </View>
+                        <Button
+                            title="Add Task"
+                            color="#841584"
+                            onPress={this.addTask}
+                            accessibilityLabel="Add more tasks"
+                        />
+                    </View>
+
+                </View>
+                </Modal>
+
         );
     }
 }
 
-export default DialogInputAddTask;
+const mapStateToProps = (state) => {
+    return {
+
+    }
+  }
+
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        createTask: (data) => { dispatch(createTask(data)) },
+    }
+  }
+
+  export default connect(mapStateToProps, mapDispatchToProps)(DialogInputAddTask)
+

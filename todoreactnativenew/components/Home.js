@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import { Text, View, FlatList, Button } from 'react-native';
+import { Text, View, FlatList, Button, Modal, ScrollView } from 'react-native';
 import TaskItem from "./TaskItem";
 import DialogInputAddTask from "./DialogInputAddTask";
+import {connect} from 'react-redux';
 
 class Home extends Component {
     // showDialog = function() {
@@ -10,13 +11,27 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            isVisible: false,
+            taskData: [],
+        };
     }
 
     reverseStateOfTask = function(id) {
 
     };
 
+    componentWillReceiveProps (nextProps) {
+        const { list } = nextProps;
+        this.setState({ taskData: list });
+    }
+
+    showDialog = () => {
+        this.setState({ isVisible: true })
+    }
+
     render() {
+        const { taskData } = this.state;
 
         // const { navigation } = this.props;
         // const taskData = navigation.getParam('taskData', 'No data');
@@ -25,29 +40,26 @@ class Home extends Component {
         // console.log(this.props.tasks);
         // console.log(this.props.taskData);
         // alert(this.props.tasks);
-        alert(this.props.taskData.tasks);
+        // alert(this.props.taskData.tasks);
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Text>Home of Tasks</Text>
-
-                <FlatList
-                    data={this.props.taskData.tasks}
-                    renderItem={({item}) => <TaskItem itemData={item}/>}
+                <ScrollView>
+                    <FlatList
+                        data={taskData}
+                        renderItem={({item}) => <TaskItem itemData={item}/>}
+                    />
+                    <Button
+                        onPress={this.showDialog}
+                        title="+"
+                        color="#841584"
+                        accessibilityLabel="Add more tasks"
+                    />
+                </ScrollView>
+                <DialogInputAddTask
+                    isVisible={this.state.isVisible}
+                    onClose={() => this.setState({ isVisible: false }) }
                 />
-
-                {/*{ this.state.showTheThing &&*/}
-                <DialogInputAddTask/>
-                {/*}*/}
-
-
-                <Button
-                    onPress={this.showDialog}
-                    title="+"
-                    color="#841584"
-                    accessibilityLabel="Add more tasks"
-                />
-
-
             </View>
         );
     }
@@ -56,5 +68,17 @@ class Home extends Component {
 // const styles = StyleSheet.create({
 //
 // });
+const mapStateToProps = state => {
+    console.log("Stateee", state);
 
-export default Home;
+    return {
+        list: state.taskReducer.listTask
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

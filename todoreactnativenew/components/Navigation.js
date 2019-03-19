@@ -5,22 +5,6 @@ import DoneTasks from "./DoneTasks";
 import UndoneTasks from "./UndoneTasks";
 import Home from "./Home";
 
-class DoneScreen extends React.Component {
-    render() {
-        return (
-            <DoneTasks taskData={state}/>
-        );
-    }
-}
-
-class UndoneScreen extends React.Component {
-    render() {
-        return (
-            <UndoneTasks taskData={state}/>
-        );
-    }
-}
-
 var state = {
     tasks: [
         {
@@ -66,6 +50,22 @@ class HomeScreen extends React.Component {
     render() {
         return (
             <Home taskData={state}/>
+        );
+    }
+}
+
+class DoneScreen extends React.Component {
+    render() {
+        return (
+            <DoneTasks taskData={state}/>
+        );
+    }
+}
+
+class UndoneScreen extends React.Component {
+    render() {
+        return (
+            <UndoneTasks taskData={state}/>
         );
     }
 }
